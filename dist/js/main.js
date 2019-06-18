@@ -2,12 +2,12 @@
 $(document).ready(function() {
   //gamemodes
   //gamemode One variables
-  var $gameOne = $("#gameOne");
-  var $gameOneImg = $("#cardMatcherOne img");
-  var gameCards = [];
+  var $gameStart = $("#gameStart");
+  var $gameImg = $("#cardMatcher img");
+  var $gameResult = $("#gameResult");
   var shuffledArray = [];
   var imgArray = [];
-  var pointsV1 = $("#pointsV1");
+  var points = $("#points");
   var pointCounter = 0;
   var turnCounter = $("#turnCounter");
   var turnsLeft = 3;
@@ -22,6 +22,8 @@ $(document).ready(function() {
   var $cardFour = $("#cardFour");
   var $cardFive = $("#cardFive");
   var $cardSix = $("#cardSix");
+  var $cardSeven = $("#cardSeven");
+  var $cardEight = $("#cardEight");
   //array to hold card variables
   var $cardIds = [
     $cardOne,
@@ -29,7 +31,9 @@ $(document).ready(function() {
     $cardThree,
     $cardFour,
     $cardFive,
-    $cardSix
+    $cardSix,
+    $cardSeven,
+    $cardEight
   ];
   //card images
   var $defaultCard = "img/svg-cards/default-card/red_joker.svg";
@@ -39,7 +43,6 @@ $(document).ready(function() {
     "jack_of_spades.svg",
     "jack_of_diamonds.svg",
     "queen_of_clubs.svg",
-
     "queen_of_diamonds.svg",
     "king_of_clubs.svg",
     "king_of_hearts.svg",
@@ -47,19 +50,21 @@ $(document).ready(function() {
     "king_of_diamonds.svg"
   ];
 
-  $gameOne.click(function() {
+  // Starts the game
+  $gameStart.click(function() {
     gameReset();
     let gameCards = cardGenerator();
     shuffledArray = $cardIds.slice($cardIds);
     shuffle(shuffledArray);
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i <= 3; i++) {
       imgArray.push(gameCards[i]);
       imgArray.push(gameCards[i]);
     }
   });
+
   //reveal image function
-  $("#cardMatcherOne img").click(function() {
+  $gameImg.click(function() {
     let currentImage = $(this);
 
     if (clickCounter === 0) {
@@ -88,14 +93,12 @@ $(document).ready(function() {
         imgOne.fadeOut(1000);
         imgTwo.fadeOut(1000);
         pointCounter++;
-        pointsV1.text(pointCounter);
+        points.text(pointCounter);
       }
 
-      if (pointCounter === 3) {
-        $("#gameOneResult")
-          .append("<h1>CONGRATULATIONS! YOU WIN!</h1>")
-          .show();
-        $("#gameOneResult").addClass("winnerText");
+      if (pointCounter === 4) {
+        $gameResult.append("<h1>CONGRATULATIONS! YOU WIN!</h1>").show();
+        $gameResult.addClass("winnerText");
       }
     } else {
       turnsLeft--;
@@ -103,11 +106,9 @@ $(document).ready(function() {
     }
 
     if (turnsLeft === 0) {
-      $gameOneImg.fadeOut(1000);
-      $("#gameOneResult")
-        .append("<h1>GAME OVER!YOU LOSE!</h1>")
-        .show();
-      $("#gameOneResult").addClass("loserText");
+      $gameImg.fadeOut(1000);
+      $gameResult.append("<h1>GAME OVER!YOU LOSE!</h1>").show();
+      $gameResult.addClass("loserText");
     }
     cardReset();
   }
@@ -125,13 +126,14 @@ $(document).ready(function() {
     }
   }
 
-  //global functions
+  // cardGenerator() - generates 4 cards from the $cards Array to be used for the card matching game
+
   function cardGenerator() {
     let path = "img/svg-cards/";
     let tmp = $cards.slice($cards);
     let ret = [];
 
-    for (var i = 0; i <= 2; i++) {
+    for (var i = 0; i <= 3; i++) {
       var index = Math.floor(Math.random() * tmp.length);
       var removed = tmp.splice(index, 1);
       // Since we are only removing one element
@@ -140,7 +142,7 @@ $(document).ready(function() {
     return ret;
   }
 
-  //shuffle an array
+  // Shuffles an array
   function shuffle(array) {
     var currentIndex = array.length;
     var temporaryValue, randomIndex;
@@ -160,27 +162,25 @@ $(document).ready(function() {
     return array;
   }
 
-  //reset current cards
+  // Reset current cards
   function cardReset() {
     clickCounter = 0;
     for (var i = 0; i <= $cardIds.length; i++) {
-      $gameOneImg.attr("src", $defaultCard);
+      $gameImg.attr("src", $defaultCard);
     }
   }
 
-  //resets entire game mode
+  // Resets entire game mode
   function gameReset() {
-    $("#gameOneResult")
-      .hide()
-      .text("");
+    $gameResult.hide().text("");
     clickCounter = 0;
-    turnsLeft = 3;
+    turnsLeft = 5;
     pointCounter = 0;
-    turnCounter.text("3");
-    pointsV1.text("0");
-    $gameOneImg.show();
+    turnCounter.text("5");
+    points.text("0");
+    $gameImg.show();
     for (var i = 0; i <= $cardIds.length; i++) {
-      $gameOneImg.attr("src", $defaultCard);
+      $gameImg.attr("src", $defaultCard);
     }
   }
 });

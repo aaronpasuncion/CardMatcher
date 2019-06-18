@@ -47,10 +47,11 @@
       <div class="card">
         <img src="img/card-images.jpg" class="card-img-top" alt="..." />
         <div class="card-body text-center">
-          <h5 class="card-title">Card Matcher V1</h5>
+          <h5 class="card-title">Card Matcher Game</h5>
           <p class="card-text">
-            In this version of card matcher you are given 5 turns to match all
-            cards. If you match them all, you win! If not, you lose :(
+            You have 5 turns to find the matching cards. if you match the cards
+            correctly, no turns are lost. if you match all cards you win! if you
+            run out of turns, you lose!
           </p>
         </div>
         <div class="card-footer text-center">
@@ -58,8 +59,8 @@
             class="btn btn-primary"
             type="button"
             data-toggle="modal"
-            data-target="#cardMatcherOne"
-            id="gameOne"
+            data-target="#cardMatcher"
+            id="gameStart"
           >
             Play
           </button>
@@ -77,16 +78,16 @@
       class="modal fade bd-example-modal-xl"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="CardMatcherV1"
+      aria-labelledby="CardMatcher"
       aria-hidden="true"
-      id="cardMatcherOne"
+      id="cardMatcher"
     >
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Card Matcher V1</h5>
+            <h5 class="modal-title">Card Matcher</h5>
           </div>
-          <div class="modal-body text-center" id="gameOneBody">
+          <div class="modal-body text-center" id="gameBody">
             <img
               src="img/svg-cards/default-card/red_joker.svg"
               alt=""
@@ -117,12 +118,22 @@
               alt=""
               id="cardSix"
             />
-            <div id="gameOneResult"></div>
+            <img
+              src="img/svg-cards/default-card/red_joker.svg"
+              alt=""
+              id="cardSeven"
+            />
+            <img
+              src="img/svg-cards/default-card/red_joker.svg"
+              alt=""
+              id="cardEight"
+            />
+            <div id="gameResult"></div>
           </div>
 
           <div class="modal-footer">
-            <h2 class="mr-auto">Turns Left: <span id="turnCounter">3</span></h2>
-            <h2 class="mr-auto">Points: <span id="pointsV1">0</span></h2>
+            <h2 class="mr-auto">Turns Left: <span id="turnCounter">5</span></h2>
+            <h2 class="mr-auto">Points: <span id="points">0</span></h2>
             <button type="button" class="btn btn-primary" data-dismiss="modal">
               End Game
             </button>
