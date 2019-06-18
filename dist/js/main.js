@@ -82,8 +82,8 @@ $(document).ready(function() {
     if (imgOne.attr("src") === imgTwo.attr("src")) {
       if (imgOne.attr("id") === imgTwo.attr("id")) {
         alert("You cannot select the same card!");
-        turnsLeft--;
-        turnCounter.text(turnsLeft);
+        clickCounter--;
+        return;
       } else {
         imgOne.fadeOut(1000);
         imgTwo.fadeOut(1000);
@@ -176,7 +176,7 @@ $(document).ready(function() {
     clickCounter = 0;
     turnsLeft = 3;
     pointCounter = 0;
-    turnCounter.text("5");
+    turnCounter.text("3");
     pointsV1.text("0");
     $gameOneImg.show();
     for (var i = 0; i <= $cardIds.length; i++) {
