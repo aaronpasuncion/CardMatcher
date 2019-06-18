@@ -1,0 +1,40 @@
+{
+  "name": "cardmatcher",
+  "version": "1.0.0",
+  "description": "Card Matching Game",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node-sass -w scss/ -o dist/css --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Card_Matcher_AA"
+  },
+  "keywords": [
+    "AaronAsuncion",
+    "Aaron",
+    "Asuncion",
+    "Paul",
+    "CardMatcher",
+    "Card",
+    "Matcher",
+    "front",
+    "end",
+    "web",
+    "development",
+    "Bootstrap4",
+    "bootstrap",
+    "html",
+    "css3",
+    "css",
+    "html5",
+    "javascript",
+    "JQuery"
+  ],
+  "author": "Aaron Paul Asuncion",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "node-sass": "^4.12.0"
+  }
+}

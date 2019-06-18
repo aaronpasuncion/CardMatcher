@@ -1,0 +1,46 @@
+$body-bg: #000;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.jumbotron {
+  padding: 10em;
+  background: linear-gradient(0deg, rgb(24, 24, 24), transparent 80%),
+    #e3e0cf url("../img/jumbotron-image.jpg") no-repeat center;
+  background-size: cover;
+}
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
+.card {
+  flex-basis: 50% !important;
+  flex-grow: 0 !important;
+  margin: 0 auto !important;
+  height: 50%;
+  width: 50%;
+}
+
+img {
+  cursor: pointer;
+}
+
+#pointsV1 {
+  color: green;
+}
+
+.fadeOut {
+  transition: 1s opacity ease-out;
+}
+
+#gameOneResult {
+  display: none;
+}
+
+.loserText {
+  color: red;
+}
+
+.winnerText {
+  color: green;
+}
