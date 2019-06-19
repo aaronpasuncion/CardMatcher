@@ -1,7 +1,5 @@
-// A $( document ).ready() block.
 $(document).ready(function() {
-  //gamemodes
-  //gamemode One variables
+  //card Matcher game variables
   var $gameStart = $("#gameStart");
   var $gameImg = $("#cardMatcher img");
   var $gameResult = $("#gameResult");
@@ -13,7 +11,6 @@ $(document).ready(function() {
   var turnsLeft = 3;
   var imgOne;
   var imgTwo;
-  //universal counter
   var clickCounter = 0;
   //card variables
   var $cardOne = $("#cardOne");
@@ -57,6 +54,7 @@ $(document).ready(function() {
     shuffledArray = $cardIds.slice($cardIds);
     shuffle(shuffledArray);
 
+    // for loop to store total of 8 cards with 4 pairs that are the same suite
     for (i = 0; i <= 3; i++) {
       imgArray.push(gameCards[i]);
       imgArray.push(gameCards[i]);
@@ -67,6 +65,7 @@ $(document).ready(function() {
   $gameImg.click(function() {
     let currentImage = $(this);
 
+    // determine if the first or second card is clicked and store the result in imgOne/imgTwo
     if (clickCounter === 0) {
       cardReveal(currentImage);
       imgOne = $(this);
@@ -75,6 +74,7 @@ $(document).ready(function() {
       imgTwo = $(this);
     }
 
+    // settimeout function that displays the 2 cards then determines if the cards match or not
     setTimeout(function() {
       if (clickCounter === 2) {
         cardMatch(imgOne, imgTwo);
@@ -84,30 +84,37 @@ $(document).ready(function() {
 
   //card match function
   function cardMatch(firstImage, secondImage) {
+    // determine if the images have the same src attribute (same src attribute = same image)
     if (imgOne.attr("src") === imgTwo.attr("src")) {
+      // validation to determine if the user clicked on the same image twice
       if (imgOne.attr("id") === imgTwo.attr("id")) {
         alert("You cannot select the same card!");
         clickCounter--;
         return;
       } else {
-        imgOne.fadeOut(1000);
-        imgTwo.fadeOut(1000);
         pointCounter++;
         points.text(pointCounter);
       }
 
+      // validate if the user has 4 points(matched all cards) and display the winner message
       if (pointCounter === 4) {
+        imgOne.hide();
+        imgTwo.hide();
         $gameResult.append("<h1>CONGRATULATIONS! YOU WIN!</h1>").show();
         $gameResult.addClass("winnerText");
+      } else {
+        imgOne.fadeOut(1000);
+        imgTwo.fadeOut(1000);
       }
     } else {
       turnsLeft--;
       turnCounter.text(turnsLeft);
     }
 
+    // validation for when the user runs out of turns, a loser message will display
     if (turnsLeft === 0) {
-      $gameImg.fadeOut(1000);
-      $gameResult.append("<h1>GAME OVER!YOU LOSE!</h1>").show();
+      $gameImg.hide();
+      $gameResult.append("<h1>GAME OVER. YOU LOSE!</h1>").show();
       $gameResult.addClass("loserText");
     }
     cardReset();
@@ -127,18 +134,19 @@ $(document).ready(function() {
   }
 
   // cardGenerator() - generates 4 cards from the $cards Array to be used for the card matching game
-
   function cardGenerator() {
     let path = "img/svg-cards/";
     let tmp = $cards.slice($cards);
     let ret = [];
 
+    // for loop that loops through the game cards and retrieves 4 cards to be used for the current game
     for (var i = 0; i <= 3; i++) {
       var index = Math.floor(Math.random() * tmp.length);
       var removed = tmp.splice(index, 1);
       // Since we are only removing one element
       ret.push(path + removed[0]);
     }
+    // returns the array of the 4 cards that are going to be used for the game
     return ret;
   }
 
@@ -179,6 +187,7 @@ $(document).ready(function() {
     turnCounter.text("5");
     points.text("0");
     $gameImg.show();
+    // loop through all the cards and reset them back to the default card
     for (var i = 0; i <= $cardIds.length; i++) {
       $gameImg.attr("src", $defaultCard);
     }
